@@ -1,0 +1,30 @@
+/* Target the specific slider we want to style */
+#modern-scroll-slider {
+    /* Make the slider track very thin and transparent */
+    -fx-background-color: transparent;
+    -fx-padding: 0;
+    -fx-pref-width: 10px; /* Set a narrow width for the scrollbar effect */
+}
+
+/* Style the track (the background line of the slider) */
+#modern-scroll-slider .track {
+    -fx-background-color: rgba(128, 128, 128, 0.2); /* Semi-transparent light gray */
+    -fx-background-radius: 5;
+    -fx-pref-width: 4px; /* Make the track itself very thin */
+    -fx-padding: 0;
+}
+
+/* Style the thumb (the movable handle) */
+#modern-scroll-slider .thumb {
+    /* Modern, slightly rounded, semi-transparent dark gray thumb */
+    -fx-background-color: rgba(60, 60, 60, 0.7);
+    -fx-background-radius: 5;
+    -fx-pref-width: 8px;   /* Size the thumb to look like a scroll handle */
+    -fx-pref-height: 20px;
+    -fx-padding: 0;
+}
+
+/* Optional: Make the thumb a little more opaque on hover */
+#modern-scroll-slider:hover .thumb {
+    -fx-background-color: rgba(60, 60, 60, 0.9);
+}
