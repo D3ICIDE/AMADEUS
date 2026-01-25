@@ -1,5 +1,6 @@
-# AMADEUS 🛡️
+# AMADEUS 
 ![Java](https://img.shields.io/badge/Java-17%2B-orange)
+![JavaFX](https://img.shields.io/badge/UI-JavaFX-blue)
 ![Gemini](https://img.shields.io/badge/AI-Google%20Gemini-blue)
 ![Porcupine](https://img.shields.io/badge/Voice-Picovoice%20Porcupine-red)
 ![Status](https://img.shields.io/badge/Status-Beta-green)
@@ -12,12 +13,12 @@
 
 ---
 
-## 📖 The Problem
+## The Problem
 Beginner coders are becoming overly dependent on AI for debugging and logic building. While we cannot realistically stop beginners from using AI, we can influence **how** they use it.
 
 **AMADEUS** tracks your AI usage and gamifies the experience, encouraging you to rely less on automated fixes and more on your own logic.
 
-## ⚙️ How It Works
+## How It Works
 AMADEUS is a Java-based voice-activated assistant.
 1.  **Trigger:** Uses **Picovoice Porcupine** for wake-word detection (offline & low latency).
 2.  **Capture:** Once triggered, it captures the code currently in your clipboard.
@@ -26,7 +27,7 @@ AMADEUS is a Java-based voice-activated assistant.
 
 ---
 
-## 🎮 Gamification Mechanics
+## Gamification Mechanics
 AMADEUS transforms debugging from a passive shortcut into an active RPG.
 
 ### The Point System
@@ -69,7 +70,7 @@ cd project-amadeus
 ### 2. Configure API Keys
 Create a src/main/resources/config.properties (or .env) file:
 ```bash
-PICOVOICE_ACCESS_KEY=your_picovoice_key_here
+PV_ACCESS_KEY=your_picovoice_key_here
 GEMINI_API_KEY=your_gemini_key_here
 ```
 ### 3. Dependencies
