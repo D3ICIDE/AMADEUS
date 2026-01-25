@@ -36,9 +36,8 @@ Command Ascend (100 pts): Provides a conceptual guide and pseudo-code. You must 
 Command Absolute (250 pts): The last resort. Provides the full corrected code block at a high cost to your progression.
 
 By making full solutions expensive, AMADEUS ensures beginners prioritize logic-building over copy-pasting, fostering long-term technical independence.
+
 <img width="320" height="320" alt="alpha" src="https://github.com/user-attachments/assets/6a9653c7-a0f1-4546-b621-d6214eb82dc7" />
 
-Reason For Using Voice Triggers: I thought it would be cool(idk).
 
-
-** All art has been created using AI
+**Note: The voice commands are just for the cool factor. AMADEUS can also be used through buttons but buttons aren't fully fleshed out yet. AI used for all of the art.(I cant draw)
