@@ -1,43 +1,65 @@
-# Project-AMADEUS
-<img width="320" height="320" alt="01" src="https://github.com/user-attachments/assets/c7dd60f3-78ab-411e-8094-7634d64dbf62" />
+# AMADEUS 🛡️
+![Java](https://img.shields.io/badge/Java-17%2B-orange)
+![Gemini](https://img.shields.io/badge/AI-Google%20Gemini-blue)
+![Porcupine](https://img.shields.io/badge/Voice-Picovoice%20Porcupine-red)
+![Status](https://img.shields.io/badge/Status-Beta-green)
 
-Beginner coders are often overly dependent on AI for debugging and logic building, which is a significant concern. While we cannot realistically stop beginners from using AI, we can influence how they use it.
+<div align="center">
+  <img width="320" height="320" alt="Amadeus Avatar" src="https://github.com/user-attachments/assets/c7dd60f3-78ab-411e-8094-7634d64dbf62" />
+  <br>
+  <em>"Don't just fix the code. Evolve the coder."</em>
+</div>
 
-AMADEUS was created to address this. It tracks your AI usage and encourages you to rely less on automated fixes and more on your own logic.
+---
 
-**How Does AMADEUS Work**
+## 📖 The Problem
+Beginner coders are becoming overly dependent on AI for debugging and logic building. While we cannot realistically stop beginners from using AI, we can influence **how** they use it.
 
-AMADEUS is a voice-activated coding assistant. When the trigger phrase is spoken, the assistant copies your code from the clipboard. It then uses the Google Gemini Model to analyze the code, identify errors, and suggest fixes.
+**AMADEUS** tracks your AI usage and gamifies the experience, encouraging you to rely less on automated fixes and more on your own logic.
 
-**Key Limitation: To maintain security and focus, it can only access code through the clipboard.
+## ⚙️ How It Works
+AMADEUS is a Java-based voice-activated assistant.
+1.  **Trigger:** Uses **Picovoice Porcupine** for wake-word detection (offline & low latency).
+2.  **Capture:** Once triggered, it captures the code currently in your clipboard.
+3.  **Analyze:** It sends the code to **Google Gemini** for analysis.
+4.  **Respond:** Based on your requested "tier" of help, it provides hints rather than direct solutions.
 
-**How Does AMADEUS Reduces AI Dependency**
+---
 
-AMADEUS is designed to transform debugging from a passive shortcut into an active learning experience. By integrating a Point and Leveling System, the tool reframes AI assistance as a limited resource, encouraging users to treat their coding journey like an RPG where self-reliance is the primary path to progression.
+## 🎮 Gamification Mechanics
+AMADEUS transforms debugging from a passive shortcut into an active RPG.
 
-**The Point System**
+### The Point System
+* **Passive Gains:** Points are earned automatically over time while you are coding independently (monitored via active window tracking).
+* **Progression:** Accumulating points triggers a **Level Up**, evolving your personal Avatar.
+* **The Freeze ❄️:** You need a minimum of **500 points** to operate the AI. If you drop below this, AMADEUS freezes until you earn points back manually.
+* **De-leveling:** Frequent AI use deducts points, potentially causing you to lose levels.
 
-Passive Gains: Points are earned automatically over time while coding independently.
+### Cost Of Help (Voice Commands)
+Each command carries a specific point cost:
 
-Progression: Accumulating points triggers a Level Up, evolving your personal Avatar.
+| Command | Cost | Description |
+| :--- | :--- | :--- |
+| **"Arise"** | **50 pts** | **Mentor Mode.** Identifies the error and provides a hint. Refuses to write code. |
+| **"Ascend"** | **100 pts** | **Guide Mode.** Provides a conceptual guide and pseudo-code. You implement the logic. |
+| **"Absolute"** | **250 pts** | **God Mode.** The last resort. Provides the full corrected code block. High cost. |
 
-The Freeze: A minimum of 500 points is required to operate. If points drop below this threshold, the AI freezes and will not respond until you earn back the required balance through independent work.
+<div align="center">
+  <img width="200" alt="Alpha Avatar" src="https://github.com/user-attachments/assets/6a9653c7-a0f1-4546-b621-d6214eb82dc7" />
+  <p><em>Example: Level 1 Alpha Avatar</em></p>
+</div>
 
-De-leveling: Frequent AI use deducts points, which can result in losing levels and regressing your Avatar's evolution.
+---
 
-**Cost Of Help**
+## 🛠️ Installation & Setup
 
-Each command carries a specific point cost, nudging users toward minimal intervention:
+### Prerequisites
+* **Java Development Kit (JDK) 17** or higher.
+* **Maven** or **Gradle**.
+* **Picovoice Access Key** (Get it from [Picovoice Console](https://console.picovoice.ai/)).
+* **Google Gemini API Key** (Get it from [Google AI Studio](https://aistudio.google.com/)).
 
-Command Arise (50 pts): A strict mentor mode. It identifies the error and provides a hint but refuses to write the code.
-
-Command Ascend (100 pts): Provides a conceptual guide and pseudo-code. You must still implement the final solution.
-
-Command Absolute (250 pts): The last resort. Provides the full corrected code block at a high cost to your progression.
-
-By making full solutions expensive, AMADEUS ensures beginners prioritize logic-building over copy-pasting, fostering long-term technical independence.
-
-<img width="320" height="320" alt="alpha" src="https://github.com/user-attachments/assets/6a9653c7-a0f1-4546-b621-d6214eb82dc7" />
-
-
-**Note: The voice commands are just for the cool factor. AMADEUS can also be used through buttons but buttons aren't fully fleshed out yet. AI used for all of the art.(I cant draw)
+### 1. Clone the Repository
+```bash
+git clone [https://github.com/yourusername/project-amadeus.git](https://github.com/yourusername/project-amadeus.git)
+cd project-amadeus
