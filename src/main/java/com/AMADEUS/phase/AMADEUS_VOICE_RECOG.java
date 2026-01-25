@@ -8,12 +8,6 @@ import java.nio.ByteOrder;
 import java.util.Arrays;
 import java.util.List;
 
-/**
- * FIXED:
- * 1. Removed Thread.sleep() which causes Microphone Buffer Overflow.
- * 2. Added explicit checks for file existence.
- * 3. Added volume level debugging to ensure Mic is actually hearing audio.
- */
 public class AMADEUS_VOICE_RECOG implements Runnable {
     private final AMADEUS_PHASE_3 uiInstance;
     private static final String ACCESS_KEY = System.getenv("PV_API_KEY");
