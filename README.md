@@ -1,8 +1,8 @@
 # AMADEUS 
-![Java](https://img.shields.io/badge/Java-17%2B-orange)
-![JavaFX](https://img.shields.io/badge/UI-JavaFX-blue)
-![Gemini](https://img.shields.io/badge/AI-Google%20Gemini-blue)
-![Porcupine](https://img.shields.io/badge/Voice-Picovoice%20Porcupine-red)
+![Java](https://img.shields.io/badge/Java-24-orange)
+![JavaFX](https://img.shields.io/badge/JavaFX-25.0.1-blue)
+![Gemini](https://img.shields.io/badge/AI-Google%20GenAI%201.0-purple)
+![Porcupine](https://img.shields.io/badge/Voice-Picovoice%203.0.5-red)
 ![Status](https://img.shields.io/badge/Status-Beta-green)
 
 <div align="center">
@@ -52,11 +52,11 @@ Each command carries a specific point cost:
 
 ---
 
-## 🛠️ Installation & Setup
+## Installation & Setup
 
 ### Prerequisites
-* **Java Development Kit (JDK) 17** or higher.
-* **Maven** or **Gradle**.
+* **Java Development Kit (JDK) 24** or higher.
+* **Maven 3.9+** .
 * **Picovoice Access Key** (Get it from [Picovoice Console](https://console.picovoice.ai/)).
 * **Google Gemini API Key** (Get it from [Google AI Studio](https://aistudio.google.com/)).
 
@@ -65,25 +65,21 @@ Each command carries a specific point cost:
 git clone https://github.com/D3ICIDE/AMADEUS_0.5.git
 ```
 ### 2. Configure API Keys
-Create a src/main/resources/config.properties (or .env) file:
+Create .env files for your API Keys:
 ```bash
 PV_ACCESS_KEY=your_picovoice_key_here
 GEMINI_API_KEY=your_gemini_key_here
 ```
-### 3. Dependencies
-If you are using Maven, ensure your pom.xml includes:
-```bash
-<dependencies>
-    <dependency>
-        <groupId>ai.picovoice</groupId>
-        <artifactId>porcupine-java</artifactId>
-        <version>3.0.0</version>
-    </dependency>
+### 3. Voice Setup (Required)
+AMADEUS uses **Picovoice Porcupine** for wake-word detection. Since Porcupine requires direct access to your local file system, follow these steps:
 
-    <dependency>
-      <groupId>com.google.cloud</groupId>
-      <artifactId>google-cloud-vertexai</artifactId>
-      <version>0.1.0</version>
-    </dependency>
-</dependencies>
-```
+###  Train Your Keywords
+Sign up at the [Picovoice Console](https://console.picovoice.ai/), train your desired commands (e.g., "Arise"), and download the `.ppn` files for your specific OS (Windows/Mac/Linux).
+
+###  Organize Models
+Place your downloaded `.ppn` files into a stable folder on your hard drive (e.g., `C:/AMADEUS/Models/`).
+
+###  Update paths in AMADEUS_VOICE_RECOG
+Open `src/main/java/com/AMADEUS/phase/AMADEUS_VOICE_RECOG.java` and update the absolute file paths to point to your local `.ppn` files.
+
+
