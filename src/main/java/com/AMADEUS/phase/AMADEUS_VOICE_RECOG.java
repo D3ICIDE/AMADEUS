@@ -19,10 +19,10 @@ public class AMADEUS_VOICE_RECOG implements Runnable {
     private static final String ACCESS_KEY = System.getenv("PV_API_KEY");
 
     // --- Define Keyword Paths ---
-    // Make sure these paths are 100% correct. If a file is missing, the code now tells you.
-    private static final String KEYWORD_PATH_ARISE = "C:\\Users\\vaibh\\Downloads\\AMADEUS\\Command-Arise_en_windows_v3_0_0\\Command-Arise_en_windows_v3_0_0.ppn";
-    private static final String KEYWORD_PATH_ASCEND = "C:\\Users\\vaibh\\Downloads\\AMADEUS\\Command-Ascend_en_windows_v3_0_0\\Command-Ascend_en_windows_v3_0_0.ppn";
-    private static final String KEYWORD_PATH_ABSOLUTE = "C:\\Users\\vaibh\\Downloads\\AMADEUS\\Command-Absolute_en_windows_v3_0_0\\Command-Absolute_en_windows_v3_0_0.ppn";
+ 
+    private static final String KEYWORD_PATH_ARISE = "Command-Arise_en_windows_v3_0_0.ppn";
+    private static final String KEYWORD_PATH_ASCEND = "Command-Ascend_en_windows_v3_0_0.ppn";
+    private static final String KEYWORD_PATH_ABSOLUTE = "Command-Absolute_en_windows_v3_0_0.ppn";
 
     private static final List<String> KEYWORD_NAMES = Arrays.asList(
             "Command Arise",
@@ -102,10 +102,7 @@ public class AMADEUS_VOICE_RECOG implements Runnable {
                 // Convert bytes to shorts
                 captureBuffer.asShortBuffer().get(porcupineBuffer);
 
-                // --- DEBUGGING: Check if Mic is hearing silence ---
-                // Uncomment the line below if it still doesn't work. It prints max volume per frame.
-                 debugAudioVolume(porcupineBuffer);
-                // --------------------------------------------------
+            
 
                 // Process audio
                 int keywordIndex = porcupine.process(porcupineBuffer);
