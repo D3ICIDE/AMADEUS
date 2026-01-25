@@ -49,7 +49,7 @@ Each command carries a specific point cost:
   <img width="200" alt="Alpha Avatar" src="https://github.com/user-attachments/assets/6a9653c7-a0f1-4546-b621-d6214eb82dc7" />
   <p><em>Example: Level 1 Alpha Avatar</em></p>
 </div>
-
+**NOTE** AI has been used for all arts.
 ---
 
 ## Installation & Setup
