@@ -63,6 +63,7 @@ Each command carries a specific point cost:
 ### 1. Clone the Repository
 ```bash
 git clone https://github.com/D3ICIDE/AMADEUS_0.5.git
+cd AMADEUS_0.5
 ```
 ### 2. Configure API Keys
 Create .env files for your API Keys:
@@ -81,5 +82,13 @@ Place your downloaded `.ppn` files into a stable folder on your hard drive (e.g.
 
 * **Update paths in AMADEUS_VOICE_RECOG**
 Open `src/main/java/com/AMADEUS/phase/AMADEUS_VOICE_RECOG.java` and update the absolute file paths to point to your local `.ppn` files.
+
+### 4. Build & Run
+Finally, use Maven to compile and launch the JavaFX interface:
+
+```bash
+mvn clean compile
+mvn javafx:run
+```
 
 
