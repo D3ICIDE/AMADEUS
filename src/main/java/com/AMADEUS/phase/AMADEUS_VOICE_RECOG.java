@@ -1,98 +1,144 @@
 package com.AMADEUS.phase;
 
 import ai.picovoice.porcupine.*;
-
 import javax.sound.sampled.*;
+import java.io.File;
 import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
-/**
- *  Replacement for AMADEUS_PHASE_1.java.
- *  This class is used for listening for voice trigger using PICOVOICE Porcupine
- * @author Vaibhav
- * @since 2025
- * @version 0.4
- *
- *
- *
- */
+import java.util.Arrays;
+import java.util.List;
 
+/**
+ * FIXED:
+ * 1. Removed Thread.sleep() which causes Microphone Buffer Overflow.
+ * 2. Added explicit checks for file existence.
+ * 3. Added volume level debugging to ensure Mic is actually hearing audio.
+ */
 public class AMADEUS_VOICE_RECOG implements Runnable {
     private final AMADEUS_PHASE_3 uiInstance;
     private static final String ACCESS_KEY = System.getenv("PV_API_KEY");
 
+    // --- Define Keyword Paths ---
+    // Make sure these paths are 100% correct. If a file is missing, the code now tells you.
+    private static final String KEYWORD_PATH_ARISE = "C:\\Users\\vaibh\\Downloads\\AMADEUS\\Command-Arise_en_windows_v3_0_0\\Command-Arise_en_windows_v3_0_0.ppn";
+    private static final String KEYWORD_PATH_ASCEND = "C:\\Users\\vaibh\\Downloads\\AMADEUS\\Command-Ascend_en_windows_v3_0_0\\Command-Ascend_en_windows_v3_0_0.ppn";
+    private static final String KEYWORD_PATH_ABSOLUTE = "C:\\Users\\vaibh\\Downloads\\AMADEUS\\Command-Absolute_en_windows_v3_0_0\\Command-Absolute_en_windows_v3_0_0.ppn";
+
+    private static final List<String> KEYWORD_NAMES = Arrays.asList(
+            "Command Arise",
+            "Command Ascend",
+            "Command Absolute"
+    );
+
+    // Cooldown management
+    private long lastTriggerTime = 0;
+    private static final long COOLDOWN_MS = 25000; // 25 seconds
 
     public AMADEUS_VOICE_RECOG(AMADEUS_PHASE_3 uiInstance) {
         this.uiInstance = uiInstance;
     }
 
-
     @Override
     public void run() {
+        // 1. Validate Environment
+        if (ACCESS_KEY == null || ACCESS_KEY.isEmpty()) {
+            System.err.println("CRITICAL ERROR: PV_API_KEY is missing from Environment Variables.");
+            return;
+        }
+
+        // 2. Validate Files
+        String[] keywordPaths = {KEYWORD_PATH_ARISE, KEYWORD_PATH_ASCEND, KEYWORD_PATH_ABSOLUTE};
+        for (String path : keywordPaths) {
+            File f = new File(path);
+            if (!f.exists()) {
+                System.err.println("CRITICAL ERROR: Keyword file not found at: " + path);
+                return;
+            }
+        }
+
         Porcupine porcupine = null;
         TargetDataLine micDataLine = null;
 
         try {
-
+            // 3. Initialize Porcupine
+            System.out.println("Initializing Porcupine...");
             porcupine = new Porcupine.Builder()
                     .setAccessKey(ACCESS_KEY)
-                    .setKeywordPath("C:\\Users\\vaibh\\Downloads\\AMADEUS\\Command-Arise_en_windows_v3_0_0\\Command-Arise_en_windows_v3_0_0.ppn")
-                    .setSensitivity(0.5f).build();
+                    .setKeywordPaths(keywordPaths)
+                    .setSensitivities(new float[]{0.5f, 0.5f, 0.5f})
+                    .build();
 
-            AudioFormat format = new AudioFormat(porcupine.getSampleRate(),
-                    16, 1, true, false);
-
+            // 4. Initialize Microphone
+            // Use Porcupine's required sample rate (usually 16000Hz)
+            AudioFormat format = new AudioFormat(porcupine.getSampleRate(), 16, 1, true, false);
             DataLine.Info dataLineInfo = new DataLine.Info(TargetDataLine.class, format);
+
+            if (!AudioSystem.isLineSupported(dataLineInfo)) {
+                System.err.println("CRITICAL ERROR: Microphone audio format not supported.");
+                return;
+            }
+
             micDataLine = (TargetDataLine) AudioSystem.getLine(dataLineInfo);
             micDataLine.open(format);
             micDataLine.start();
 
-
             int frameLength = porcupine.getFrameLength();
-            short[] porcupineBuffer = new short[frameLength];
             ByteBuffer captureBuffer = ByteBuffer.allocate(frameLength * 2);
             captureBuffer.order(ByteOrder.LITTLE_ENDIAN);
+            short[] porcupineBuffer = new short[frameLength];
 
-            System.out.println("Status: Listening for wake word...");
+            System.out.println("Status: AMADEUS is Listening. (Cooldown system active)");
 
+            // 5. Main Loop
             while (true) {
-
+                // Read bytes from mic
                 int numBytesRead = micDataLine.read(captureBuffer.array(), 0, captureBuffer.capacity());
 
-
                 if (numBytesRead != frameLength * 2) {
+                    // Start of stream or glitch
                     continue;
                 }
 
-
+                // Convert bytes to shorts
                 captureBuffer.asShortBuffer().get(porcupineBuffer);
 
+                // --- DEBUGGING: Check if Mic is hearing silence ---
+                // Uncomment the line below if it still doesn't work. It prints max volume per frame.
+                 debugAudioVolume(porcupineBuffer);
+                // --------------------------------------------------
 
+                // Process audio
                 int keywordIndex = porcupine.process(porcupineBuffer);
 
                 if (keywordIndex >= 0) {
-                    // Wake word detected!
-                    System.out.println("AMADEUS Activated....");
+                    long currentTime = System.currentTimeMillis();
 
-                    // Trigger UI
-                    uiInstance.triggerAnalysis();
+                    // Check Cooldown
+                    if (currentTime - lastTriggerTime < COOLDOWN_MS) {
+                        System.out.println("Wake word ignored (Cooling down): " + KEYWORD_NAMES.get(keywordIndex));
+                    } else {
+                        // Activate
+                        String detectedKeyword = KEYWORD_NAMES.get(keywordIndex);
+                        System.out.println(">>> AMADEUS ACTIVATED: " + detectedKeyword);
 
-                    // Pause listening for 25 seconds
-                    try {
-                        Thread.sleep(25000);
-                    } catch (InterruptedException ie) {
-                        Thread.currentThread().interrupt();
+                        // Update cooldown timer
+                        lastTriggerTime = currentTime;
+
+                        // Trigger UI
+                        if (uiInstance != null) {
+                            uiInstance.triggerAnalysis(detectedKeyword);
+                        }
                     }
-
-                    System.out.println("Status: Listening for wake word again...");
                 }
             }
 
         } catch (PorcupineException e) {
-            System.err.println("Porcupine error: " + e.getMessage());
+            System.err.println("Porcupine Error (Check API Key or .ppn file version): " + e.getMessage());
         } catch (LineUnavailableException e) {
-            System.err.println("Microphone error: " + e.getMessage());
+            System.err.println("Microphone Error (Line Unavailable): " + e.getMessage());
+        } catch (Exception e) {
+            e.printStackTrace();
         } finally {
-            // Cleanup resources
             if (micDataLine != null) {
                 micDataLine.stop();
                 micDataLine.close();
@@ -102,6 +148,13 @@ public class AMADEUS_VOICE_RECOG implements Runnable {
             }
         }
     }
+
+    // Helper to see if Mic is working
+    private void debugAudioVolume(short[] buffer) {
+        int max = 0;
+        for (short s : buffer) max = Math.max(max, Math.abs(s));
+        if (max > 500) { // Only print if there is actual noise
+            System.out.println("Mic Hearing Audio. Level: " + max);
+        }
+    }
 }
-
-

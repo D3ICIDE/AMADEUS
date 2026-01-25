@@ -39,7 +39,7 @@ public class RewardManager {
         };
 
 
-        scheduler.scheduleAtFixedRate(task, 5, 30, TimeUnit.SECONDS);
+        scheduler.scheduleAtFixedRate(task, 5, 1, TimeUnit.SECONDS);
     }
 
 

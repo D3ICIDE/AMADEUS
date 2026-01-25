@@ -15,10 +15,36 @@
     </properties>
 
     <dependencies>
+
+            <dependency>
+                <groupId>org.openjfx</groupId>
+                <artifactId>javafx-controls</artifactId>
+                <version>25.0.1</version>
+            </dependency>
+            <dependency>
+                <groupId>org.openjfx</groupId>
+                <artifactId>javafx-web</artifactId>
+                <version>25.0.1</version>
+            </dependency>
+            <dependency>
+                <groupId>org.openjfx</groupId>
+                <artifactId>javafx-graphics</artifactId>
+                <version>25.0.1</version>
+            </dependency>
+            <dependency>
+                <groupId>org.openjfx</groupId>
+                <artifactId>javafx-fxml</artifactId>
+                <version>25.0.1</version>
+            </dependency>
         <dependency>
             <groupId>net.sf.phat</groupId>
             <artifactId>sphinx4-core</artifactId>
             <version>5prealpha</version>
+        </dependency>
+        <dependency>
+            <groupId>org.commonmark</groupId>
+            <artifactId>commonmark</artifactId>
+            <version>0.24.0</version>
         </dependency>
         <dependency>
             <groupId>net.sf.phat</groupId>
@@ -30,6 +56,11 @@
             <groupId>ai.picovoice</groupId>
             <artifactId>porcupine-java</artifactId>
             <version>3.0.5</version>
+        </dependency>
+        <dependency>
+            <groupId>com.vladsch.flexmark</groupId>
+            <artifactId>flexmark-all</artifactId>
+            <version>0.64.8</version>
         </dependency>
 
             <dependency>
