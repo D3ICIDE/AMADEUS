@@ -1,7 +1,7 @@
 # AMADEUS 
 ![Java](https://img.shields.io/badge/Java-24-orange)
 ![JavaFX](https://img.shields.io/badge/JavaFX-25.0.1-blue)
-![Gemini](https://img.shields.io/badge/AI-Google%20GenAI%201.0-purple)
+![Gemini](https://img.shields.io/badge/AI-Google%20Gemini%202.5-purple)
 ![Porcupine](https://img.shields.io/badge/Voice-Picovoice%203.0.5-red)
 ![Status](https://img.shields.io/badge/Status-Beta-green)
 
