@@ -62,11 +62,8 @@ Each command carries a specific point cost:
 
 ### 1. Clone the Repository
 ```bash
-git clone [https://github.com/yourusername/project-amadeus.git](https://github.com/yourusername/project-amadeus.git)
-cd project-amadeus
+git clone https://github.com/D3ICIDE/AMADEUS_0.5.git
 ```
-
-
 ### 2. Configure API Keys
 Create a src/main/resources/config.properties (or .env) file:
 ```bash
