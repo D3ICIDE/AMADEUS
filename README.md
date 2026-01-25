@@ -32,7 +32,7 @@ AMADEUS transforms debugging from a passive shortcut into an active RPG.
 ### The Point System
 * **Passive Gains:** Points are earned automatically over time while you are coding independently (monitored via active window tracking).
 * **Progression:** Accumulating points triggers a **Level Up**, evolving your personal Avatar.
-* **The Freeze ❄️:** You need a minimum of **500 points** to operate the AI. If you drop below this, AMADEUS freezes until you earn points back manually.
+* **The Freeze:** You need a minimum of **500 points** to operate the AI. If you drop below this, AMADEUS freezes until you earn points back manually.
 * **De-leveling:** Frequent AI use deducts points, potentially causing you to lose levels.
 
 ### Cost Of Help (Voice Commands)
@@ -63,3 +63,29 @@ Each command carries a specific point cost:
 ```bash
 git clone [https://github.com/yourusername/project-amadeus.git](https://github.com/yourusername/project-amadeus.git)
 cd project-amadeus
+```
+
+
+### 2. Configure API Keys
+Create a src/main/resources/config.properties (or .env) file:
+```bash
+PICOVOICE_ACCESS_KEY=your_picovoice_key_here
+GEMINI_API_KEY=your_gemini_key_here
+```
+### 3. Dependencies
+If you are using Maven, ensure your pom.xml includes:
+```bash
+<dependencies>
+    <dependency>
+        <groupId>ai.picovoice</groupId>
+        <artifactId>porcupine-java</artifactId>
+        <version>3.0.0</version>
+    </dependency>
+
+    <dependency>
+      <groupId>com.google.cloud</groupId>
+      <artifactId>google-cloud-vertexai</artifactId>
+      <version>0.1.0</version>
+    </dependency>
+</dependencies>
+```
