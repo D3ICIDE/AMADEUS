@@ -75,12 +75,15 @@ GEMINI_API_KEY=your_gemini_key_here
 AMADEUS uses **Picovoice Porcupine** for wake-word detection. Since Porcupine requires direct access to your local file system, follow these steps:
 
 * **Train Your Keywords**
+
 Sign up at the [Picovoice Console](https://console.picovoice.ai/), train your desired commands (e.g., "Arise"), and download the `.ppn` files for your specific OS (Windows/Mac/Linux).
 
 * **Organize Models**
+
 Place your downloaded `.ppn` files into a stable folder on your hard drive (e.g., `C:/AMADEUS/Models/`).
 
 * **Update paths in AMADEUS_VOICE_RECOG**
+
 Open `src/main/java/com/AMADEUS/phase/AMADEUS_VOICE_RECOG.java` and update the absolute file paths to point to your local `.ppn` files.
 
 ### 4. Build & Run
