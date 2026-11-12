@@ -1,5 +1,3 @@
-package com.AMADEUS.phase;
-
 import ai.picovoice.porcupine.*;
 import javax.sound.sampled.*;
 import java.io.File;
@@ -9,14 +7,14 @@ import java.util.Arrays;
 import java.util.List;
 
 public class AMADEUS_VOICE_RECOG implements Runnable {
-    private final AMADEUS_PHASE_3 uiInstance;
+    private final AMADEUS_UI uiInstance;
     private static final String ACCESS_KEY = System.getenv("PV_API_KEY");
 
     // --- Define Keyword Paths ---
- 
-    private static final String KEYWORD_PATH_ARISE = "Command-Arise_en_windows_v3_0_0.ppn";
-    private static final String KEYWORD_PATH_ASCEND = "Command-Ascend_en_windows_v3_0_0.ppn";
-    private static final String KEYWORD_PATH_ABSOLUTE = "Command-Absolute_en_windows_v3_0_0.ppn";
+    // Make sure these paths are 100% correct.
+    private static final String KEYWORD_PATH_ARISE = "C:\\Users\\vaibh\\Downloads\\AMADEUS\\Command-Arise_en_windows_v3_0_0\\Command-Arise_en_windows_v3_0_0.ppn";
+    private static final String KEYWORD_PATH_ASCEND = "C:\\Users\\vaibh\\Downloads\\AMADEUS\\Command-Ascend_en_windows_v3_0_0\\Command-Ascend_en_windows_v3_0_0.ppn";
+    private static final String KEYWORD_PATH_ABSOLUTE = "C:\\Users\\vaibh\\Downloads\\AMADEUS\\Command-Absolute_en_windows_v3_0_0\\Command-Absolute_en_windows_v3_0_0.ppn";
 
     private static final List<String> KEYWORD_NAMES = Arrays.asList(
             "Command Arise",
@@ -28,13 +26,12 @@ public class AMADEUS_VOICE_RECOG implements Runnable {
     private long lastTriggerTime = 0;
     private static final long COOLDOWN_MS = 25000; // 25 seconds
 
-    public AMADEUS_VOICE_RECOG(AMADEUS_PHASE_3 uiInstance) {
+    public AMADEUS_VOICE_RECOG(AMADEUS_UI uiInstance) {
         this.uiInstance = uiInstance;
     }
 
     @Override
     public void run() {
-        // 1. Validate Environment
         if (ACCESS_KEY == null || ACCESS_KEY.isEmpty()) {
             System.err.println("CRITICAL ERROR: PV_API_KEY is missing from Environment Variables.");
             return;
@@ -54,7 +51,6 @@ public class AMADEUS_VOICE_RECOG implements Runnable {
         TargetDataLine micDataLine = null;
 
         try {
-            // 3. Initialize Porcupine
             System.out.println("Initializing Porcupine...");
             porcupine = new Porcupine.Builder()
                     .setAccessKey(ACCESS_KEY)
@@ -62,8 +58,6 @@ public class AMADEUS_VOICE_RECOG implements Runnable {
                     .setSensitivities(new float[]{0.5f, 0.5f, 0.5f})
                     .build();
 
-            // 4. Initialize Microphone
-            // Use Porcupine's required sample rate (usually 16000Hz)
             AudioFormat format = new AudioFormat(porcupine.getSampleRate(), 16, 1, true, false);
             DataLine.Info dataLineInfo = new DataLine.Info(TargetDataLine.class, format);
 
@@ -95,8 +89,6 @@ public class AMADEUS_VOICE_RECOG implements Runnable {
 
                 // Convert bytes to shorts
                 captureBuffer.asShortBuffer().get(porcupineBuffer);
-
-            
 
                 // Process audio
                 int keywordIndex = porcupine.process(porcupineBuffer);
@@ -140,12 +132,4 @@ public class AMADEUS_VOICE_RECOG implements Runnable {
         }
     }
 
-    // Helper to see if Mic is working
-    private void debugAudioVolume(short[] buffer) {
-        int max = 0;
-        for (short s : buffer) max = Math.max(max, Math.abs(s));
-        if (max > 500) { // Only print if there is actual noise
-            System.out.println("Mic Hearing Audio. Level: " + max);
-        }
-    }
 }

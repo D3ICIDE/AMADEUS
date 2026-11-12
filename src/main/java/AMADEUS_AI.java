@@ -1,4 +1,3 @@
-package com.AMADEUS.phase;
 import com.google.genai.Client;
 import com.google.genai.types.GenerateContentConfig;
 import com.google.genai.types.GenerateContentResponse;
@@ -10,10 +9,10 @@ import java.awt.datatransfer.DataFlavor;
 import java.awt.datatransfer.UnsupportedFlavorException;
 import java.io.IOException;
 
-public class AMADEUS_PHASE_2 implements Runnable {
-    private final AMADEUS_PHASE_3 mainApp;
+public class AMADEUS_AI implements Runnable {
+    private final AMADEUS_UI mainApp;
     private final String detectedKeyword;
-    public AMADEUS_PHASE_2(AMADEUS_PHASE_3 mainApp, Label promptLabel, String detectedKeyword) {
+    public AMADEUS_AI(AMADEUS_UI mainApp, Label promptLabel, String detectedKeyword) {
         this.mainApp = mainApp;
 
         this.detectedKeyword = detectedKeyword; // Initialize the new field
@@ -56,14 +55,8 @@ public class AMADEUS_PHASE_2 implements Runnable {
             }
 
             ResponseFormatter formatter = mainApp.getResponseFormatter();
-
-
             formatter.setPrompt(requestText);
-
-
             Client client = Client.builder().apiKey(apiKey).build();
-
-
             String modelName = getGeminiModelName();
             String systemPrompt = getSystemPrompt();
 
@@ -112,10 +105,10 @@ public class AMADEUS_PHASE_2 implements Runnable {
 
     private String getGeminiModelName() {
         return switch (detectedKeyword) {
-            case "Command Arise" -> "gemini-2.5-flash"; // Speed
-            case "Command Ascend" -> "gemini-2.5-pro";  // Balance
-            case "Command Absolute" -> "gemini-2.5-pro"; // Quality (or Ultra if available)
-            default -> "gemini-2.5-flash";
+            case "Command Arise" -> "gemini-3.1-flash-lite"; // Speed
+            case "Command Ascend" -> "gemini-3.6-flash";  // Balance
+            case "Command Absolute" -> "gemma-4-26b-a4b-it"; // Quality
+            default -> "gemini-3.1-flash-lite";
         };
     }
 

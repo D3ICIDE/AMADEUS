@@ -1,5 +1,3 @@
-package com.AMADEUS.phase;
-
 import java.util.Random;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
@@ -11,12 +9,12 @@ public class RewardManager {
     // Reference to the shared, thread-safe score container from AMADEUS_PHASE_3
     private final AtomicInteger pointRef;
     // Reference to the JavaFX application instance for safe UI callback
-    private final AMADEUS_PHASE_3 uiCallback;
+    private final AMADEUS_UI uiCallback;
 
     private final ScheduledExecutorService scheduler = Executors.newSingleThreadScheduledExecutor();
     private final Random RNG = new Random();
 
-    public RewardManager(AMADEUS_PHASE_3 uiCallback, AtomicInteger pointReference) {
+    public RewardManager(AMADEUS_UI uiCallback, AtomicInteger pointReference) {
         this.uiCallback = uiCallback;
         this.pointRef = pointReference;
     }
@@ -39,7 +37,7 @@ public class RewardManager {
         };
 
 
-        scheduler.scheduleAtFixedRate(task, 5, 1, TimeUnit.SECONDS);
+        scheduler.scheduleAtFixedRate(task, 5, 10, TimeUnit.SECONDS);
     }
 
 

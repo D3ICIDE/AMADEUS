@@ -1,5 +1,3 @@
-package com.AMADEUS.phase;
-
 import javafx.animation.Animation;
 import javafx.animation.FadeTransition;
 import javafx.animation.RotateTransition;
