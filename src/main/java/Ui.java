@@ -23,17 +23,17 @@ import javafx.util.Duration;
 
 import java.util.concurrent.atomic.AtomicInteger;
 
-public class AMADEUS_UI extends Application {
+public class Ui extends Application {
 
     // --- STATE VARIABLES ---
     public static final AtomicInteger point = new AtomicInteger(500);
-    private static AMADEUS_UI instance;
+    private static Ui instance;
     private int currentLevel = 0;
     private static final int COST_ARISE = 50;     // Cheap: Basic Hint
     private static final int COST_ASCEND = 100;    // Medium: Detailed Guide
     private static final int COST_ABSOLUTE = 250; // Ultimate: Costly
 
-    Avatar_Config avatarConfig = new Avatar_Config();
+    AvatarConfig avatarConfig = new AvatarConfig();
 
     // --- GUI COMPONENTS ---
     private Stage primaryStage;
@@ -59,7 +59,7 @@ public class AMADEUS_UI extends Application {
         launch(args);
     }
 
-    public static AMADEUS_UI getInstance() {
+    public static Ui getInstance() {
         return instance;
     }
 
@@ -100,7 +100,7 @@ public class AMADEUS_UI extends Application {
 
         updateAnimationTimeline(point.get());
 
-        AMADEUS_VOICE_RECOG listener = new AMADEUS_VOICE_RECOG(this.instance);
+        VoiceRecognition listener = new VoiceRecognition(this.instance);
         Thread listenerThread = new Thread(listener, "AMADEUS-Voice-Listener");
         listenerThread.setDaemon(true);
         listenerThread.start();
@@ -184,7 +184,7 @@ public class AMADEUS_UI extends Application {
             showThinking();
 
             // 6. Launch AI Thread with detected keyword
-            AMADEUS_AI logic = new AMADEUS_AI(this, promptLabel, detectedKeyword);
+            Ai logic = new Ai(this, promptLabel, detectedKeyword);
             Thread logicThread = new Thread(logic, "AMADEUS-AI-Processor");
             logicThread.setDaemon(true);
             logicThread.start();

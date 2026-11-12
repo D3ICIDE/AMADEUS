@@ -7,7 +7,7 @@ import javafx.scene.layout.StackPane;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 
-public class Avatar_Config {
+public class AvatarConfig {
 
     private int testCommandIndex = 0;
     private final String[] TEST_COMMANDS = {
@@ -22,21 +22,21 @@ public class Avatar_Config {
             frame_13, frame_14, frame_15, frame_16, Icon;
 
     void setupCharacterView(StackPane root) {
-        AMADEUS_UI.view = new ImageView(frame_01);
-        AMADEUS_UI.view.setFitWidth(200);
-        AMADEUS_UI.view.setFitHeight(250);
-        AMADEUS_UI.view.setTranslateX(25);
-        AMADEUS_UI.view.preserveRatioProperty().set(true);
+        Ui.view = new ImageView(frame_01);
+        Ui.view.setFitWidth(200);
+        Ui.view.setFitHeight(250);
+        Ui.view.setTranslateX(25);
+        Ui.view.preserveRatioProperty().set(true);
 
-        AMADEUS_UI.scoreDisplay = new Label("EXP: " + AMADEUS_UI.point.get());
-        AMADEUS_UI.scoreDisplay.setFont(Font.font("Verdana", FontWeight.BOLD, 14));
-        AMADEUS_UI.scoreDisplay.setStyle("-fx-text-fill: #00FFFF; -fx-effect: dropshadow(one-pass-box, darkgreen, 4, 0.5, 0, 0);");
-        AMADEUS_UI.scoreDisplay.setTranslateY(10);
+        Ui.scoreDisplay = new Label("EXP: " + Ui.point.get());
+        Ui.scoreDisplay.setFont(Font.font("Verdana", FontWeight.BOLD, 14));
+        Ui.scoreDisplay.setStyle("-fx-text-fill: #00FFFF; -fx-effect: dropshadow(one-pass-box, darkgreen, 4, 0.5, 0, 0);");
+        Ui.scoreDisplay.setTranslateY(10);
 
-        AMADEUS_UI.levelNotification = new Label("");
-        AMADEUS_UI.levelNotification.setFont(Font.font("Verdana", FontWeight.BOLD, 12));
-        AMADEUS_UI.levelNotification.setOpacity(0);
-        AMADEUS_UI.levelNotification.setTranslateY(30);
+        Ui.levelNotification = new Label("");
+        Ui.levelNotification.setFont(Font.font("Verdana", FontWeight.BOLD, 12));
+        Ui.levelNotification.setOpacity(0);
+        Ui.levelNotification.setTranslateY(30);
 
         // --- TEST BUTTON ---
         Button testButton = new Button("TEST: " + TEST_COMMANDS[0].replace("Command ", ""));
@@ -46,7 +46,7 @@ public class Avatar_Config {
             String commandToTest = TEST_COMMANDS[testCommandIndex];
 
             // FIX: Use the active singleton instance instead of 'new AMADEUS_UI()'
-            AMADEUS_UI uiObj = AMADEUS_UI.getInstance();
+            Ui uiObj = Ui.getInstance();
             if (uiObj != null) {
                 uiObj.triggerAnalysis(commandToTest);
             }
@@ -60,9 +60,9 @@ public class Avatar_Config {
         testButton.setOnMouseEntered(e -> testButton.setStyle("-fx-background-color: #00FFFF; -fx-text-fill: black; -fx-border-color: #00FFFF; -fx-border-radius: 5; -fx-font-size: 10px; -fx-cursor: hand;"));
         testButton.setOnMouseExited(e -> testButton.setStyle("-fx-background-color: transparent; -fx-text-fill: #00FFFF; -fx-border-color: #00FFFF; -fx-border-radius: 5; -fx-font-size: 10px; -fx-cursor: hand;"));
 
-        root.getChildren().addAll(AMADEUS_UI.view, AMADEUS_UI.scoreDisplay, AMADEUS_UI.levelNotification, testButton);
-        StackPane.setAlignment(AMADEUS_UI.scoreDisplay, Pos.TOP_LEFT);
-        StackPane.setAlignment(AMADEUS_UI.levelNotification, Pos.TOP_LEFT);
+        root.getChildren().addAll(Ui.view, Ui.scoreDisplay, Ui.levelNotification, testButton);
+        StackPane.setAlignment(Ui.scoreDisplay, Pos.TOP_LEFT);
+        StackPane.setAlignment(Ui.levelNotification, Pos.TOP_LEFT);
         StackPane.setAlignment(testButton, Pos.BOTTOM_RIGHT);
         StackPane.setMargin(testButton, new javafx.geometry.Insets(10));
     }

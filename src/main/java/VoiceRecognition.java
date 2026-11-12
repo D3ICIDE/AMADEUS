@@ -8,8 +8,8 @@ import java.nio.ByteOrder;
 import java.util.Arrays;
 import java.util.List;
 
-public class AMADEUS_VOICE_RECOG implements Runnable {
-    private final AMADEUS_UI uiInstance;
+public class VoiceRecognition implements Runnable {
+    private final Ui uiInstance;
     private static final Dotenv dotenv = Dotenv.load();
     private static final String ACCESS_KEY = dotenv.get("PV_API_KEY");
 
@@ -29,7 +29,7 @@ public class AMADEUS_VOICE_RECOG implements Runnable {
     private long lastTriggerTime = 0;
     private static final long COOLDOWN_MS = 25000; // 25 seconds
 
-    public AMADEUS_VOICE_RECOG(AMADEUS_UI uiInstance) {
+    public VoiceRecognition(Ui uiInstance) {
         this.uiInstance = uiInstance;
     }
 

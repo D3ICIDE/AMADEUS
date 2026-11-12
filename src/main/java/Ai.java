@@ -10,12 +10,12 @@ import java.awt.datatransfer.DataFlavor;
 import java.awt.datatransfer.UnsupportedFlavorException;
 import java.io.IOException;
 
-public class AMADEUS_AI implements Runnable {
-    private final AMADEUS_UI mainApp;
+public class Ai implements Runnable {
+    private final Ui mainApp;
     private final Dotenv dotEnv = Dotenv.load();
     private final String geminiapi = dotEnv.get("GEMINI_API_KEY");
     private final String detectedKeyword;
-    public AMADEUS_AI(AMADEUS_UI mainApp, Label promptLabel, String detectedKeyword) {
+    public Ai(Ui mainApp, Label promptLabel, String detectedKeyword) {
         this.mainApp = mainApp;
 
         this.detectedKeyword = detectedKeyword; // Initialize the new field

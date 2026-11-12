@@ -9,12 +9,12 @@ public class RewardManager {
     // Reference to the shared, thread-safe score container from AMADEUS_PHASE_3
     private final AtomicInteger pointRef;
     // Reference to the JavaFX application instance for safe UI callback
-    private final AMADEUS_UI uiCallback;
+    private final Ui uiCallback;
 
     private final ScheduledExecutorService scheduler = Executors.newSingleThreadScheduledExecutor();
     private final Random RNG = new Random();
 
-    public RewardManager(AMADEUS_UI uiCallback, AtomicInteger pointReference) {
+    public RewardManager(Ui uiCallback, AtomicInteger pointReference) {
         this.uiCallback = uiCallback;
         this.pointRef = pointReference;
     }
