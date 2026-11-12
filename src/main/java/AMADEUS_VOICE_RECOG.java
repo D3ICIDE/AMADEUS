@@ -15,9 +15,9 @@ public class AMADEUS_VOICE_RECOG implements Runnable {
 
     // --- Define Keyword Paths ---
     // Make sure these paths are 100% correct.
-    private static final String KEYWORD_PATH_ARISE = "/Command-Arise_en_windows_v3_0_0/Command-Arise_en_windows_v3_0_0.ppn";
-    private static final String KEYWORD_PATH_ASCEND = "/Command-Ascend_en_windows_v3_0_0/Command-Ascend_en_windows_v3_0_0.ppn";
-    private static final String KEYWORD_PATH_ABSOLUTE = "/Command-Absolute_en_windows_v3_0_0/Command-Absolute_en_windows_v3_0_0.ppn";
+    private static final String KEYWORD_PATH_ARISE = "models/Command-Arise_en_windows_v3_0_0/Command-Arise_en_windows_v3_0_0.ppn";
+    private static final String KEYWORD_PATH_ASCEND = "models/Command-Ascend_en_windows_v3_0_0/Command-Ascend_en_windows_v3_0_0.ppn";
+    private static final String KEYWORD_PATH_ABSOLUTE = "models/Command-Absolute_en_windows_v3_0_0/Command-Absolute_en_windows_v3_0_0.ppn";
 
     private static final List<String> KEYWORD_NAMES = Arrays.asList(
             "Command Arise",
