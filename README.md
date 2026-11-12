@@ -1,3 +1,5 @@
+
+![CI](https://github.com/D3ICIDE/AMADEUS/actions/workflows/maven.yml/badge.svg)
 # AMADEUS 
 ![Java](https://img.shields.io/badge/Java-24-orange)
 ![JavaFX](https://img.shields.io/badge/JavaFX-25.0.1-blue)
