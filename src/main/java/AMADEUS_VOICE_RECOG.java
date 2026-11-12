@@ -1,4 +1,6 @@
 import ai.picovoice.porcupine.*;
+import io.github.cdimascio.dotenv.Dotenv;
+
 import javax.sound.sampled.*;
 import java.io.File;
 import java.nio.ByteBuffer;
@@ -8,7 +10,8 @@ import java.util.List;
 
 public class AMADEUS_VOICE_RECOG implements Runnable {
     private final AMADEUS_UI uiInstance;
-    private static final String ACCESS_KEY = System.getenv("PV_API_KEY");
+    private static final Dotenv dotenv = Dotenv.load();
+    private static final String ACCESS_KEY = dotenv.get("PV_API_KEY");
 
     // --- Define Keyword Paths ---
     // Make sure these paths are 100% correct.

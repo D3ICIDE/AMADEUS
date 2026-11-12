@@ -1,6 +1,7 @@
 import com.google.genai.Client;
 import com.google.genai.types.GenerateContentConfig;
 import com.google.genai.types.GenerateContentResponse;
+import io.github.cdimascio.dotenv.Dotenv;
 import javafx.application.Platform;
 import javafx.scene.control.Label;
 import java.awt.*;
@@ -11,6 +12,8 @@ import java.io.IOException;
 
 public class AMADEUS_AI implements Runnable {
     private final AMADEUS_UI mainApp;
+    private final Dotenv dotEnv = Dotenv.load();
+    private final String geminiapi = dotEnv.get("GEMINI_API_KEY");
     private final String detectedKeyword;
     public AMADEUS_AI(AMADEUS_UI mainApp, Label promptLabel, String detectedKeyword) {
         this.mainApp = mainApp;
@@ -42,7 +45,7 @@ public class AMADEUS_AI implements Runnable {
     public void run() {
         System.out.println("--- AI TASK STARTED ---");
         try {
-            String apiKey = System.getenv("GEMINI_API_KEY");
+            String apiKey = geminiapi;
             if (apiKey == null || apiKey.trim().isEmpty()) {
                 handleError("ERROR: GEMINI_API_KEY missing.");
                 return;
