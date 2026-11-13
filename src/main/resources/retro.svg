@@ -1,0 +1,45 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#17202a"/><stop offset="1" stop-color="#0b1016"/>
+    </linearGradient>
+    <linearGradient id="case" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#e6dcc3"/><stop offset="1" stop-color="#c3b898"/>
+    </linearGradient>
+    <radialGradient id="glow" cx="0.5" cy="0.45" r="0.7">
+      <stop offset="0" stop-color="#14391f"/><stop offset="1" stop-color="#06140a"/>
+    </radialGradient>
+    <filter id="blur" x="-20%" y="-50%" width="140%" height="200%"><feGaussianBlur stdDeviation="4"/></filter>
+    <pattern id="scan" width="4" height="4" patternUnits="userSpaceOnUse">
+      <rect width="4" height="1.4" fill="#000" fill-opacity="0.28"/>
+    </pattern>
+    <clipPath id="scr"><rect x="108" y="104" width="296" height="214" rx="34"/></clipPath>
+  </defs>
+  <rect width="512" height="512" rx="112" fill="url(#bg)"/>
+  <!-- stand -->
+  <rect x="196" y="372" width="120" height="26" rx="6" fill="#a89d7e"/>
+  <rect x="150" y="394" width="212" height="30" rx="12" fill="url(#case)"/>
+  <!-- monitor body -->
+  <rect x="72" y="66" width="368" height="312" rx="42" fill="url(#case)"/>
+  <rect x="72" y="66" width="368" height="312" rx="42" fill="none" stroke="#9c9275" stroke-width="3"/>
+  <!-- bezel recess -->
+  <rect x="94" y="88" width="324" height="250" rx="40" fill="#8f8567"/>
+  <!-- screen -->
+  <rect x="108" y="104" width="296" height="214" rx="34" fill="url(#glow)"/>
+  <g clip-path="url(#scr)">
+    <text x="256" y="232" text-anchor="middle" textLength="248" lengthAdjust="spacingAndGlyphs"
+          font-family="'DejaVu Sans Mono','Courier New',Consolas,monospace" font-weight="700" font-size="52"
+          fill="#4dff88" filter="url(#blur)" opacity="0.8">AMADEUS</text>
+    <text x="256" y="232" text-anchor="middle" textLength="248" lengthAdjust="spacingAndGlyphs"
+          font-family="'DejaVu Sans Mono','Courier New',Consolas,monospace" font-weight="700" font-size="52"
+          fill="#7dffa6">AMADEUS</text>
+    <text x="132" y="286" font-family="'DejaVu Sans Mono','Courier New',Consolas,monospace" font-weight="700"
+          font-size="30" fill="#4dff88">&gt;</text>
+    <rect x="164" y="262" width="22" height="28" fill="#7dffa6"/>
+    <rect x="108" y="104" width="296" height="214" fill="url(#scan)"/>
+    <ellipse cx="190" cy="132" rx="90" ry="22" fill="#fff" fill-opacity="0.06"/>
+  </g>
+  <!-- drive slot + LED -->
+  <rect x="124" y="348" width="104" height="9" rx="4.5" fill="#6f6650"/>
+  <circle cx="392" cy="352" r="7" fill="#4dff88"/>
+</svg>

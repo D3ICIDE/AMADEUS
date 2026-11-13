@@ -85,7 +85,7 @@ public class AvatarConfig {
             frame_14 = new Image("02.png");
             frame_15 = new Image("03.png");
             frame_16 = new Image("04.png");
-            Icon     = new Image("jjk.jpg"); // FIX: Loaded Icon here
+            Icon     = new Image("retro_512.png");
         } catch (Exception e) {
             System.out.println("Image loading error: " + e.getMessage());
         }
